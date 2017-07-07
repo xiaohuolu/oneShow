@@ -2,7 +2,7 @@
   "name": "oneshow",
   "version": "1.0.0",
   "description": "oneshow",
-  "author": "zxjsc",
+  "author": "zxjsc,leexyon",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
