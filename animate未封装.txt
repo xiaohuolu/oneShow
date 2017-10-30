@@ -1,0 +1,26 @@
+var dom =  document.getElementsByClassName('new_head');
+			var body = document.body.scrollTop;
+			for(var a = 0;a < dom.length ; a++){
+				this.offset.push(dom[a].offsetTop)
+			}
+			var chazhi = body - this.offset[i] + 50 ;
+			if( Math.abs(chazhi) >= 10 ){
+				// ¼ÆËã¾àÀë
+				var tran = Math.abs(chazhi)/60;
+				var h = 0;
+				var animate = setInterval(()=>{
+					if( chazhi > 0 ){
+						h += tran;
+						if( h > chazhi ){
+							window.clearInterval(animate);
+						}
+					}
+					if( chazhi < 0 ){
+						h -= tran;
+						if( h < chazhi ){
+							window.clearInterval(animate);
+						}
+					}
+					document.body.scrollTop = body - h;
+				},6)
+			}
