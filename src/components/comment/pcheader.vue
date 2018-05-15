@@ -9,12 +9,12 @@
               <li @click="goHome()">
                 首页
               </li>
-              <li v-for="(categorie,i) in categories" @click="search(i)" :class="{ 'current' : i == activeI }" v-if="i != 5" >
+              <li v-for="(categorie,i) in categories" @click="search(i)" :class="{ 'current' : i == activeI }" v-if="i != 6" >
                 {{categorie.name}}
               </li>
-              <li @click="sharePage()" :class="{ 'current' : 5 == activeI }">
+              <!--<li @click="sharePage()" :class="{ 'current' : 5 == activeI }">
                 分享
-              </li>
+              </li>-->
             </ul>
 
             <div class="user" v-if="!onLogin">
@@ -58,10 +58,11 @@
                     </router-link>
                   </li>
                 </ul>
-                <div class="img_box">
-                  <a href="http://www.oneshow.org/creativeweek/">
-                    <img src="/static/img/nav_banner.jpg" alt="">
-                  </a>
+                   <div class="img_box">
+                   	
+                    <a :href="categorie.href" target="_blank">
+                        <img :src="categorie.image" alt="">
+                    </a>
 
                 </div>
               </div>
@@ -147,8 +148,15 @@ export default {
         this.activeUl = 1;
         this.data.categorieId = this.categories[i].id
         this.utils.ajax(this,'/app/articleList',this.data,false).then((res)=>{
+   console.log(res)
           this.articles = res.data.categories
           this.categorie = res.data.categorie
+         if(i==5){
+         	     this.share = true;
+//       console.log( this.categorie.href)
+
+         }
+         
           //console.log( this.categorie);
           this.categorie.image = 'http://123.57.15.15:8080' +  this.categorie.image.replace('/_thumbs','')
           if (  this.categorie.keywords == 1) {

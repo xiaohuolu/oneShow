@@ -1,11 +1,11 @@
 <!-- 首页 -->
 <template>
-	<div id="home-index">
+	<div id="home-index" >
 		<!-- banner -->
 		<mt-swipe id="swipe" class="pc_hide" v-if="!this.utils.userIf()" :auto="4000" :stopPropagation="true">
 		  <mt-swipe-item  v-for="(item,i) in imgitems" key="i">
 
-		  		<img @click="goHref(i,1)" class="imgWidth" :src="'http://123.57.15.15:8080'+item.image">
+		  		<img  @click="goHref(i,1)" class="imgWidth" :src="'http://123.57.15.15:8080'+item.image">
 
 		  </mt-swipe-item>
 		</mt-swipe>
@@ -13,7 +13,7 @@
 		<mt-tab-container  v-if="this.utils.userIf()" v-model="indexSwipe" class="mobile_hide pc_banner" 	:swipeable="false">
 			<mt-tab-container-item v-for="(item,i) in imgitems" key="i" :id="i+1" ref="data">
 				<div class="tab_list">
-						<img @click="goHref(i,2)" :src="'http://123.57.15.15:8080'+item.image" width="100%">
+						<img @click="goHref(i,1)" :src="'http://123.57.15.15:8080'+item.image" width="100%">
 				</div>
 			</mt-tab-container-item>
 			<div class="index">
@@ -25,7 +25,7 @@
 			<!-- 通知noticelist -->
 		<div class="list_box">
 			<ul class="notice_list">
-				<li v-for="(articleList,i) in articleLists" key="i" @click="goHref(i)" v-if="i<2">
+				<li v-for="(articleList,i) in articleLists" key="i" @click="goHref(i)" v-if="i<3">
 					<a href="javascript:void(0)"  style="display: flex;color: #171717;">
 						<div class="img_box">
 							<img :src="'http://123.57.15.15:8080'+articleList.image">
@@ -43,7 +43,7 @@
 						</div>
 					</a>
 				</li>
-				<li v-for="(articleList,i) in articleLists" key="i" v-if="i==2">
+				<!--<li v-for="(articleList,i) in articleLists" key="i" v-if="i==2">
 					<router-link style="display: flex;color: #171717;" to="/listenter">
 						<div class="img_box">
 							<img src="/static/img/index3.png">
@@ -60,15 +60,20 @@
 							</h3>
 						</div>
 					</router-link>
-				</li>
+				</li>-->
 			</ul>
 		</div>
 
 		<div class="tab_box" id="tab_box">
+
+
 			<button @click="prev($event)">
+
+				<!-- <img style="color:#eee" width="50px" height="50px"  src="../../../static/img/arrowhead7.png" alt="" /> -->
 				<i class="iconfont icon-jiantou"></i>
 			</button>
 			<button  @click="next($event)">
+						<!-- <img width="50px" height="50px"  src="../../../static/img/arrow487.png" alt="" /> -->
 				<i class="iconfont icon-jiantou-copy"></i>
 			</button>
 			<mt-tab-container v-model="active" 	:swipeable="true">
@@ -211,7 +216,6 @@ export default {
 						img{
 							height: 100%;
 							width: auto;
-							cursor: pointer;
 						}
 					}
 				}
@@ -242,9 +246,6 @@ export default {
 		}
 		#swipe{
 			height: 170px;
-		}
-		.tab_listimg img{
-			cursor: pointer;
 		}
 		.mint-swipe{
 			img{

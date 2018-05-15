@@ -66,7 +66,7 @@ export default {
 			this.face = data
 		},
     submit(){
-			this.data.email = sessionStorage.token.split('/')[0];
+			this.data.email = sessionStorage.token.split('⊰')[0];
       if(this.data.newPassword  !==  this.newPassword2){
         Toast({message: '两次密码输入不一致',position: 'center',duration: 3000});
       }else if(this.data.newPassword.length < 6){

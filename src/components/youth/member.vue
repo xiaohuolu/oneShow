@@ -185,7 +185,7 @@ export default {
 				this.show = true
 			}
 		}else {
-			let tokenData = sessionStorage.token.split('/');
+			let tokenData = sessionStorage.token.split('⊰');
 			console.log(tokenData);
 			let uid = tokenData[0]
 			this.utils.ajax(this,"/user/isVip",{uid:tokenData[3]},false).then((res)=>{

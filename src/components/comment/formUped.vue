@@ -2,6 +2,7 @@
   <div id="formUped">
       <form class="">
         <div class="user_body">
+
               <mt-radio
                   title="是否在校内担任职务"
                   v-model="applyList.zhiwu"
@@ -18,14 +19,21 @@
                   :options="[{disabled: true,value:'1',label:'是'},{disabled: true,value:'0',label:'否'}]">
               </mt-radio>
               <div class="main">
+
                 <label v-if="applyList.xiaoji==1" for="">
                   <textarea disabled="disabled"  v-model="applyList.xiaojimiaoshu" name="name">
                   </textarea>
                 </label>
-                <label for="">
+
+                <label class="input">
+                  <span>你的年级</span>
+                  <input disabled="disabled" v-model="applyList.nengli" type="text" name="" value=" ">
+                </label>
+
+                <!-- <label for="">
                   <span>·如有更多自我描述，可上传简历至附件：</span>
                   <input disabled="disabled" type="file" name="" value="" >
-                </label>
+                </label> -->
               </div>
               <mt-radio
                 title="是否曾参加过One Club China Workshop 青年创意营？"
@@ -44,10 +52,10 @@
                   <textarea disabled="disabled"  v-model="applyList.jianyi" name="name">
                   </textarea>
                 </label>
-                <label for="">
+                <!-- <label for="">
                   <span>[附上自己对本季大使工作的策划案，将有机会为你的学校争取到 一次One Lectrue机会]</span>
                   <input disabled="disabled" type="file" name="" value="">
-                </label>
+                </label> -->
                 <label>
                   <span>在你的院系内，你最喜欢的一位广告/艺术类老师是？</span>
                 </label>
@@ -96,6 +104,7 @@
                   <span>推荐人</span>
                   <input disabled="disabled" v-model="applyList.tuijianren" style="width:100%;box-sizing:border-box;;margin-left:0" type="text" name="" value="">
                 </label>
+
                 <h3>（选填）请务必填写推荐人真实姓名，否则填写无效</h3>
                 <label for="">
                   <span>推荐人手机号</span>
@@ -126,6 +135,7 @@ export default {
 				'zhiwu':'',
 				'zhiyuan':'',
 				'xiaoji':'',
+				'nengli':'',
 				'workshop':'',
 				'zhidao':'',
 				'teacherIs':'',
@@ -151,11 +161,12 @@ export default {
   },
   methods :{
     getForm(){
-      let tokenData = sessionStorage.token.split('/');
+      let tokenData = sessionStorage.token.split('⊰');
       let uid1 = tokenData[3]
       this.utils.ajax(this,'/app/ambassador',{uid:uid1},false).then((res)=>{
         if (res.data.sss == 1 || res.data.sss == 0 ) {
-            this.applyList = res.data.Ambassador[0]
+            this.applyList = res.data.Ambassador[0];
+            console.log( this.applyList)
             this.year = this.applyList.kaixue.split('-')[0];
             this.mouth = this.applyList.kaixue.split('-')[1];
         }else if ( res.data.sss == 2 ) {
@@ -170,7 +181,7 @@ export default {
 <style lang="scss">
 #formUped{
   form{
-    // 下面
+    /*下面*/
     .user_body{
       padding-top: 20px;
       border-top:1px #d3d3d3 solid;

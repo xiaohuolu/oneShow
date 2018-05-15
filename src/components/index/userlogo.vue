@@ -68,7 +68,7 @@ export default {
 			this.face = data;
 		},
 		upload(){
-	      let tokenData = sessionStorage.token.split('/')
+	      let tokenData = sessionStorage.token.split('⊰')
 	      let email = tokenData[0];
 				let fm = new FormData();
 				fm.append('file',this.data);

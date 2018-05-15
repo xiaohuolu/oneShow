@@ -59,7 +59,7 @@
                 </div>
               </div>
               <div class="r" >
-                <p>&copy;2000-2017 THE ONE CLUB FOR ART&amp;<code>COPY</code> .ALL RIGHTS RESERVED.  <h5>
+                <p>&copy;2000-2018 THE ONE CLUB FOR CREATIVITY .ALL RIGHTS RESERVED.  <h5>
                       <router-link to="/instruction">
                           使用条款
                       </router-link>

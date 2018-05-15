@@ -10,7 +10,7 @@ export default {
   name: 'index-box',
   data() {
   	return {
-      
+
   	}
   },
   props: {},
@@ -23,6 +23,6 @@ export default {
 </script>
 <style  lang="scss">
  #index-box{
- 
+
  }
 </style>

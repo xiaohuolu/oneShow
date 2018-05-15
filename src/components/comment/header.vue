@@ -65,6 +65,7 @@
     name: 'zxjsc-header',
     data() {
      return {
+     ejtitle:[],
        popupVisible: false,
        popupVisible2:false,
        popupVisible3:false,
@@ -72,6 +73,7 @@
        second_num:true,
        active:-1,
        open : -1,
+
        menu:[
           {
             yiji:"了解ONE SHOW",
@@ -103,6 +105,10 @@
                 {
                   router:"/know/contact",
                   erji:"联系我们"
+                },
+                        {
+                  router:"/artical/6cf1ac6401324a41a0a13df3d0dea71f",
+                  erji:"CIA中国独立创意联盟"
                 }
 
             ]
@@ -149,7 +155,7 @@
             children:[
               {
                 router:'/youth/competition',
-                erji:"中华青年创新竞赛",
+                erji:"中华青年奖",
               },
               {
                 router:'/youth/camp',
@@ -253,24 +259,44 @@
 		this.getRouter()
    },
    methods: {
+
    	getRouter(){
 
    	},
    	getL(){
+
    		//一级栏目
    		this.$http.post(this.apiUrl,this.data1)
    		.then((response) => {
+    // console.log(response)
    			var firstLength = response.body.data.categories.length;
    			for(var i = 0 ;  i<firstLength  ; i++){
    				this.menu[i].yiji = response.body.data.categories[i].name;
    				this.menu[i].id = response.body.data.categories[i].id;
    				this.data1.categorieId = this.menu[i].id
+
    				if( i<5 ){
    					this.$http.post(this.apiUrl1,this.data1)
    					.then((response)=>{
+              console.log(response)
+// response.body.data.categories[j].name
+// response.body.data.categories[j].parentId
+           for(var j=0;j<firstLength;j++){
+                for(var k=0;k<response.body.data.categories.length;k++){
+                  if(this.menu[j].id==response.body.data.categories[k].parentId){
+                     this.menu[j].children[k].erji=response.body.data.categories[k].name;
+                  }
+                }
+
+           }
+
+
+
 
 	   				})
    				}
+
+
    			}
    		})
    	},
@@ -322,6 +348,7 @@
 
     },
     close(j, r , event , meta){
+
     this.active = j;
 //  console.log(meta)
     this.popupVisible = false;
@@ -331,6 +358,7 @@
     if ( video != "share" &&  r != "/know/stort" && r != "/youth/ambassador" && r != "/youth/member"  ) {
         vm.$http.post(vm.apiUrl1,vm.data1)
         .then((response) => {
+
 	        let resDataCate = response.body.data;
 	        var id = resDataCate.categories[j].id;
 	      	if(response.body.data.categories[j].href != '' && response.body.data.categories[j].href != undefined)
@@ -375,6 +403,7 @@ components: {
   header{
     background:rgb(54,53,50);
     height: 45px;
+    // height:120px;
     .logo{
       margin-left: 20px;
       float: left;
@@ -393,6 +422,7 @@ components: {
     }
     img{
       height: 45px
+    // height:120px;
     }
 
   }
@@ -439,7 +469,7 @@ components: {
                 transform:rotate(0deg)
               }
             }
-            
+
           }
         }
       }

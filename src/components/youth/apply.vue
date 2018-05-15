@@ -68,6 +68,7 @@
 			<!-- 需要上传的表单 -->
 				<form class=""  urlencode="multipart/form-data" v-if="status == 3 ">
 						<div class="user_body">
+
 									<mt-radio
 										  title="是否在校内担任职务"
 										  v-model="applyList.zhiwu"
@@ -88,14 +89,16 @@
 											<textarea v-model="applyList.xiaojimiaoshu" name="name">
 											</textarea>
 										</label>
-										<label for="">
+
+											<label for="">
 											<span>你的年级</span>
-											<input type="text" name="" value="">
+											<input v-model="applyList.nengli" type="text" name="" value="">
 										</label>
-										<label for="">
+
+										<!-- <label for="">
 											<span>·如有更多自我描述，可上传简历至附件：</span>
 											<input type="file" name="" value="" @change="change($event)">
-										</label>
+										</label> -->
 									</div>
 									<mt-radio
 									  title="是否曾参加过One Club China Workshop 青年创意营？"
@@ -119,10 +122,10 @@
 											<textarea v-model="applyList.jianyi" name="name">
 											</textarea>
 										</label>
-										<label for="">
+										<!-- <label for="">
 											<span>[附上自己对本季大使工作的策划案，将有机会为你的学校争取到 一次One Lectrue机会]</span>
 											<input type="file"  @change="change1($event)" name="" value="">
-										</label>
+										</label> -->
 										<label>
 											<span>在你的院系内，你最喜欢的一位广告/艺术类老师是？</span>
 										</label>
@@ -171,6 +174,7 @@
 											<span>推荐人</span>
 											<input v-model="applyList.tuijianren" style="width:100%;box-sizing:border-box;;margin-left:0" type="text" name="" value="">
 										</label>
+
 										<h3>（选填）请务必填写推荐人真实姓名，否则填写无效</h3>
 										<label for="">
 											<span>推荐人手机号</span>
@@ -247,6 +251,7 @@ export default {
 				'zhiwu':'',
 				'zhiyuan':'',
 				'xiaoji':'',
+				'nengli':'',
 				'workshop':'',
 				'zhidao':'',
 				'teacherIs':'',
@@ -262,6 +267,7 @@ export default {
 				'youjidizhi':'',
 				'tuijianren':'',
 				'tuijianrenShouji':''
+
 			},
 			year:'',
 			mouth:'',
@@ -293,12 +299,14 @@ export default {
 					duration: 3000
 				})
 			}else {
-				let tokenData = sessionStorage.token.split('/')
+				let tokenData = sessionStorage.token.split('⊰')
 				this.loginData.email = tokenData[0];
 				let length =  tokenData[2].length;
 				this.applyList.uid = tokenData[3];
 				this.loginData.password = tokenData[2].substring(0,length-2);
+
 				this.$http.post(this.utils.baseUrl+'/login',this.loginData).then((res)=>{
+
 						this.userList = res.data.data.userinfo
 						this.face = this.userList.face
 						if (this.userList.sex == 1) {
@@ -307,11 +315,15 @@ export default {
 							this.userList.sex = '女'
 						}
 				})
+
 				// 判断 申请状态   改变页面内容
 				this.utils.ajax(this,'/app/ambassador',{uid:this.applyList.uid},false).then((res)=>{
 					this.status = res.data.sss;
 					if( res.data.sss == 0 || res.data.sss == 1 ){
-						this.applyList = res.data.Ambassador[0]
+						this.applyList = res.data.Ambassador[0];
+			     console.log(this.applyList);
+			     return;
+
 						this.year = this.applyList.kaixue.split('-')[0];
 	            		this.mouth = this.applyList.kaixue.split('-')[1];
 					}else if ( res.data.sss == 2 ) {
@@ -342,18 +354,23 @@ export default {
 			this.applyList.kaixue = this.year +'-'+ this.mouth;
 			let fm = new FormData();
 			for(let i in this.applyList){
+
 				fm.append(i, this.applyList[i])
+
 			}
-			console.log(fm);
+
 			fm.append('jfile',this.files);
-			fm.append('uid',this.applyList.uid)
-			fm.append('cfile',this.files2)
+			fm.append('uid',this.applyList.uid);
+			fm.append('cfile',this.files2);
+
 			this.$http.post(this.utils.baseUrlApp+'/uploadAmbassadorInfo',fm).then((res)=>{
+
 				let msg;
 				if (res.body.data != 0 ) {
 				 	msg= res.body.data.errmsg
 				}else {
 					msg= '申请成功，正在审核'
+
 				}
 				Toast({
 					message: msg,
@@ -465,7 +482,7 @@ export default {
 					}
 				}
 			}
-			// **************/
+		/**/
 			.header_infor{
 				flex:1;
 				font-size: 13px;
@@ -493,7 +510,7 @@ export default {
 					}
 				}
 			}
-			// 下面
+			/*下面*/
 			.user_body{
 				padding-top: 20px;
 				border-top:1px #d3d3d3 solid;

@@ -136,7 +136,7 @@ export default {
 					duration: 3000
 				})
 			}else {
-				let tokenData = sessionStorage.token.split('/')
+				let tokenData = sessionStorage.token.split('⊰')
 				this.loginData.email = tokenData[0];
 				let length =  tokenData[2].length;
 				this.applyList.uid = tokenData[3];

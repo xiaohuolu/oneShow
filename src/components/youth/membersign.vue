@@ -162,10 +162,13 @@ export default {
       if (sessionStorage.token== undefined) {
         this.show = true
       }else {
-        let tokenData = sessionStorage.token.split('/')
+        let tokenData = sessionStorage.token.split('⊰');
+
+        
         this.loginData.email = tokenData[0];
         let length =  tokenData[2].length;
         this.loginData.password = tokenData[2].substring(0,length-2);
+    
         // 获取个人信息
         this.utils.ajax(this,'/user/login',this.loginData,false).then((res)=>{
           let userList = res.data.userinfo;

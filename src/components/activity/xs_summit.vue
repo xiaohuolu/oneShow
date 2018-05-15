@@ -1,10 +1,10 @@
 <template>
 	<div id="xs_summit">
     <div class="banner">
-      <img src="/static/img/mine_banner.png">  
+      <img src="/static/img/mine_banner.png">
     </div>
     <div class="title">
-      腾讯实效营销峰会
+      {{title}}
     </div>
     <div class="content">
       <div class="row" v-html="html"></div>
@@ -20,7 +20,8 @@ export default {
       data:{
         categorieId:this.$route.params.id,
       },
-      html:'<div>加载中...请稍后</div>'
+      html:'<div>加载中...请稍后</div>',
+      title:'',
   	}
   },
   props: {},
@@ -33,6 +34,7 @@ export default {
       this.utils.ajax(this, '/articleData', this.data, false).then((res) => {
         //console.log(res)
         this.html = res.data.articles.content;
+          this.title = res.data.articles.title
       });
     },
   },

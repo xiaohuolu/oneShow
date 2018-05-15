@@ -177,7 +177,7 @@ export default {
 							msg = res.errmsg
 					}else {
 						msg = "登录成功",
-						sessionStorage.setItem('token',res.data.userinfo.email+'/'+res.data.userinfo.address+'/'+res.data.userinfo.password+".."+'/'+res.data.userinfo.uid);
+						sessionStorage.setItem('token',res.data.userinfo.email+'⊰'+res.data.userinfo.address+'⊰'+res.data.userinfo.password+".."+'⊰'+res.data.userinfo.uid);
 						this.popupVisible = false;
 						this.$router.go(0);
 					}

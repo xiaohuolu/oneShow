@@ -1,5 +1,5 @@
 ﻿<template>
-	<div id="zxjsc-footer">
+	<div id="zxjsc-footer" >
 	   <div class="footer_main">
             <div class="logo_box">
                 <a href="https://www.anquan.org/"><img class="l" src="/static/img/footer_left.png"></a>

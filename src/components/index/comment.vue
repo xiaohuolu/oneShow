@@ -26,13 +26,13 @@
 									</ul>
 							</div>
 							<!-- 三个 -->
-							<div class="pc_enter" v-if=" special == 1 || special == 2 ">
+							<!--<div class="pc_enter" v-if=" special == 1 || special == 2 ">
 									<div class="enter">
 											<a href="http://www.oneshow.cn:8088/file/2017call_for_entry.zip">
 												<img src="/static/img/enter1.png" alt="">
 											</a>
 									</div>
-							</div>
+							</div>-->
 							<div class="pc_enter" v-if=" special == 1  ">
 									<div class="enter">
 										<router-link to="/creative/answer">
